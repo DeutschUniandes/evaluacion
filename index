@@ -3,56 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Draggable Words</title>
-<style>
-  .draggable {
-    padding: 2px;
-    margin-right: 10px;
-    float: left;
-    font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
-    cursor: move;
-    position: relative; /* Ensure draggables are positioned relative */
-    z-index: 10; /* Ensure draggables are on top of the image */
-  }
-
-  #Holder {
-    width: 100%;
-    overflow: auto;
-    position: relative; /* Ensure the holder is positioned relative */
-  }
-
-  #MyImage {
-    z-index: 1; /* Ensure the image is below the draggables */
-    position: relative; /* Ensure the image is positioned relative */
-  }
-
-  #resetButton {
-    margin-bottom: 10px;
-    z-index: 5; /* Ensure the reset button is above the image but below the draggables */
-    position: relative; /* Ensure the button is positioned relative */
-  }
-</style>
 <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-<script>
-  $(document).ready(function() {
-    var Items = [
-      "Flexibilidad", "Falta de flexibilidad", "Falta de Paciencia", "claridad en las reglas",
-      "Preparación Clase", "Trato", "Instrucciones de clase", "entretenida", "preferencias",
-      "Reglas claras", "Percepción de Falta de", "Incumplimiento Clase", "Instrucciones claras",
-      "Impaciencia", "monótona", "empatía", "Variedad", "Cumplimiento", "respeto", "Creatividad",
-      "Empatía", "Respeto en la interacción", "Clase principalmente frontal", "Clase con diferentes estilos de socialización",
-      "Calificación eficiente", "Calificación deficiente", "Capacidad de adaptación", "Entusiasmo",
-      "Falta de entusiasmo", "Falta de exigencia", "Demasiada exigencia", "Impuntualidad", "Comunicación efectiva",
-      "Trabajo sólo con el libro", "Puntualidad"
-    ];
+<script language="javascript" type="text/javascript">
+  var Items = [
+    "Flexibilidad", "Falta de flexibilidad", "Falta de Paciencia", "claridad en las reglas",
+    "Preparación Clase", "Trato", "Instrucciones de clase", "entretenida", "preferencias",
+    "Reglas claras", "Percepción de Falta de", "Incumplimiento Clase", "Instrucciones claras",
+    "Impaciencia", "monótona", "empatía", "Variedad", "Cumplimiento", "respeto", "Creatividad",
+    "Empatía", "Respeto en la interacción", "Clase principalmente frontal", "Clase con diferentes estilos de socialización",
+    "Calificación eficiente", "Calificación deficiente", "Capacidad de adaptación", "Entusiasmo",
+    "Falta de entusiasmo", "Falta de exigencia", "Demasiada exigencia", "Impuntualidad", "Comunicación efectiva",
+    "Trabajo sólo con el libro", "Puntualidad"
+  ];
 
-    var firstHalfColor = '#800080'; // Purple color
-    var secondHalfColor = '#81F7F3'; // Original color
+  var divColor = '#81F7F3'; // Font color
+  var fontSize = 25; // Font size
+  var fontFamily = 'Arial, Helvetica, sans-serif'; // Font family
+  var Image = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwGJ0SyTuFZQDcEYanr4KRMxXF4w47hjw-WzC1wiGwWRYQHP8Otywk7aO940nFacvIu0ii_Gyhf-w0jMDaa-jMcuM_OpdQgVrrJjP4Q8mNiV5PEWFcdyfZLYBeBQsRl1J8NxWdYTNOXeZamDpaDLSkHRjjd7Gy2z45OJl7ChKRS9Z3v2B_jBGgwWTFxLaR/w689-h374/Captura%20de%20pantalla%202024-05-18%20213831.png';
+
+  $(document).ready(function() {
+    $('#MyImage').attr('src', Image);
+    $('#MyImage').attr('height', '70%');
+    $('#MyImage').attr('width', '100%');
 
     $.each(Items, function(i) {
-      var color = i < Items.length / 2 ? firstHalfColor : secondHalfColor;
-      $('#Holder').append("<div id='" + i + "' class='draggable' style='background-color:" + color + ";'>" + Items[i] + "</div>");
+      $('#Holder').append("<div id='" + i + "'>" + Items[i] + "</div>");
+      $('#' + i).attr('style', 'padding:2px 2px 2px 2px;margin-right:10px;float:left;background-color:' + divColor + ';font-size:' + fontSize + ';font-family:' + fontFamily);
       $('#' + i).draggable();
     });
 
@@ -68,7 +45,7 @@
 <div>
   <button id="resetButton">Reset</button>
 </div>
-<img id="MyImage" src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_Blank.svg" height="70%" width="100%" />
+<img id="MyImage" />
 <div id="Holder"></div>
 </body>
 </html>
