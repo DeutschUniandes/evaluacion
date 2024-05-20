@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Draggable Words</title>
+<style>
+  .draggable {
+    padding: 2px;
+    margin-right: 10px;
+    float: left;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: move;
+    position: relative; /* Ensure draggables are positioned relative */
+    z-index: 10; /* Ensure draggables are on top of the image */
+  }
+
+  #Holder {
+    width: 100%;
+    overflow: auto;
+    position: relative; /* Ensure the holder is positioned relative */
+  }
+
+  #MyImage {
+    z-index: 1; /* Ensure the image is below the draggables */
+    position: relative; /* Ensure the image is positioned relative */
+  }
+
+  #resetButton {
+    margin-bottom: 10px;
+    z-index: 5; /* Ensure the reset button is above the image but below the draggables */
+    position: relative; /* Ensure the button is positioned relative */
+  }
+</style>
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var Items = [
+      "Flexibilidad", "Falta de flexibilidad", "Falta de Paciencia", "claridad en las reglas",
+      "Preparación Clase", "Trato", "Instrucciones de clase", "entretenida", "preferencias",
+      "Reglas claras", "Percepción de Falta de", "Incumplimiento Clase", "Instrucciones claras",
+      "Impaciencia", "monótona", "empatía", "Variedad", "Cumplimiento", "respeto", "Creatividad",
+      "Empatía", "Respeto en la interacción", "Clase principalmente frontal", "Clase con diferentes estilos de socialización",
+      "Calificación eficiente", "Calificación deficiente", "Capacidad de adaptación", "Entusiasmo",
+      "Falta de entusiasmo", "Falta de exigencia", "Demasiada exigencia", "Impuntualidad", "Comunicación efectiva",
+      "Trabajo sólo con el libro", "Puntualidad"
+    ];
+
+    var firstHalfColor = '#800080'; // Purple color
+    var secondHalfColor = '#81F7F3'; // Original color
+
+    $.each(Items, function(i) {
+      var color = i < Items.length / 2 ? firstHalfColor : secondHalfColor;
+      $('#Holder').append("<div id='" + i + "' class='draggable' style='background-color:" + color + ";'>" + Items[i] + "</div>");
+      $('#' + i).draggable();
+    });
+
+    $('#resetButton').click(function() {
+      $.each(Items, function(i) {
+        $('#' + i).animate({ top: 0, left: 0 }, 'fast');
+      });
+    });
+  });
+</script>
+</head>
+<body>
+<div>
+  <button id="resetButton">Reset</button>
+</div>
+<img id="MyImage" src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_Blank.svg" height="70%" width="100%" />
+<div id="Holder"></div>
+</body>
+</html>
